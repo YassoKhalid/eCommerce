@@ -19,7 +19,6 @@ A simple Java-based e‑commerce system demonstrating core domain concepts:
    - Normal Checkout  
    - Expired Product  
    - Out of Stock  
-   - Mixed Digital + Physical  
 6. [Corner Cases](#corner-cases)  
 7. [Extending & Testing](#extending--testing)  
 8. [License](#license)  
