@@ -66,10 +66,9 @@ Below are key corner cases with links to code examples and snippet references:
 ```java
 // Should throw IllegalArgumentException for non-positive quantity
 Cart cart = new Cart();
-Product p = new DigitalProduct("Sample", 5.00);
-
+Product p = new Product("Sample", 5.00, 10);
 try {
-    cart.addProduct(p, 0);
+    cart.addCartItem(new cartItem(p, 0));
 } catch (IllegalArgumentException ex) {
     System.out.println(ex.getMessage());
 }
@@ -81,38 +80,12 @@ try {
 // Empty cart: checkout is a no-op, balance unchanged
 Customer c = new Customer("Test", "t@example.com", "01000000000", 100.00);
 Cart empty = new Cart();
-empty.checkout(c);
-System.out.println(c.getBalance()); // Expected: 100.00
+empty.Checkout(c);
+System.out.println(c.balance); 
 ```
 
-### 3. Exact Balance Match<a name="exact-balance-match"></a>
 
-```java
-// Customer balance equals total cost
-Customer c = new Customer("Exact", "e@example.com", "01000000001", 50.00);
-Cart cart = new Cart();
-cart.addProduct(new DigitalProduct("Item", 25.00), 2);
-cart.checkout(c);
-System.out.println(c.getBalance()); // Expected: 0.00
-```
-
-### 4. Multiple Checkouts<a name="multiple-checkouts"></a>
-
-```java
-// Second checkout should throw IllegalStateException
-Customer c = new Customer("Multi", "m@example.com", "01000000002", 200.00);
-Cart cart = new Cart();
-cart.addProduct(new DigitalProduct("D", 10.00), 1);
-cart.checkout(c);
-
-try {
-    cart.checkout(c);
-} catch (IllegalStateException ex) {
-    System.out.println(ex.getMessage());
-}
-```
-
-### 5. Shipping-Only Products<a name="shipping-only-products"></a>
+### 3. Shipping-Only Products<a name="shipping-only-products"></a>
 
 ```java
 // Product price = 0, shipping fee applied correctly
