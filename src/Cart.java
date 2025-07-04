@@ -114,6 +114,7 @@ public class Cart {
         System.out.printf("Subtotal%7.0f%n", total);
         System.out.printf("Shipping%7.0f%n", shipping);
         System.out.printf("Amount%9.0f%n", paidAmount);
+        customer.balance -= paidAmount;
     }
 
     double getCartShippingFees() {
