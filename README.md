@@ -1,3 +1,4 @@
+
 # eCommerce Demo
 
 A simple Java-based e‑commerce system demonstrating core domain concepts:
@@ -16,7 +17,6 @@ A simple Java-based e‑commerce system demonstrating core domain concepts:
 3. [Usage & Code Examples](#usage--code-examples)  
 4. [Corner Cases](#corner-cases)  
 5. [Extending & Testing](#extending--testing)  
-6. [License](#license)  
 
 ---
 
@@ -66,7 +66,7 @@ Below are key corner cases with links to code examples and snippet references:
 ```java
 // Should throw IllegalArgumentException for non-positive quantity
 Cart cart = new Cart();
-Product p = new DigitalProduct("Sample", BigDecimal.valueOf(5.00));
+Product p = new DigitalProduct("Sample", 5.00);
 
 try {
     cart.addProduct(p, 0);
@@ -91,7 +91,7 @@ System.out.println(c.getBalance()); // Expected: 100.00
 // Customer balance equals total cost
 Customer c = new Customer("Exact", "e@example.com", "01000000001", 50.00);
 Cart cart = new Cart();
-cart.addProduct(new DigitalProduct("Item", BigDecimal.valueOf(25.00)), 2);
+cart.addProduct(new DigitalProduct("Item", 25.00), 2);
 cart.checkout(c);
 System.out.println(c.getBalance()); // Expected: 0.00
 ```
@@ -102,7 +102,7 @@ System.out.println(c.getBalance()); // Expected: 0.00
 // Second checkout should throw IllegalStateException
 Customer c = new Customer("Multi", "m@example.com", "01000000002", 200.00);
 Cart cart = new Cart();
-cart.addProduct(new DigitalProduct("D", BigDecimal.valueOf(10.00)), 1);
+cart.addProduct(new DigitalProduct("D", 10.00), 1);
 cart.checkout(c);
 
 try {
@@ -118,7 +118,7 @@ try {
 // Product price = 0, shipping fee applied correctly
 Customer c = new Customer("Ship", "s@example.com", "01000000003", 20.00);
 Cart cart = new Cart();
-cart.addProduct(new PhysicalProduct("SampleBox", BigDecimal.ZERO, LocalDate.now().plusDays(10), BigDecimal.valueOf(5.00)), 2);
+cart.addProduct(new PhysicalProduct("SampleBox", 0.00, LocalDate.now().plusDays(10), 5.00), 2);
 cart.checkout(c);
 System.out.println(c.getBalance()); // Expected: 20 - (2*5) = 10.00
 ```
@@ -131,8 +131,4 @@ System.out.println(c.getBalance()); // Expected: 20 - (2*5) = 10.00
 * **Build Tool**: Convert to Maven/Gradle for dependency & test management.
 * **CI**: Add GitHub Actions for automated builds & tests.
 
----
 
-## License
-
-This project is licensed under the \[
