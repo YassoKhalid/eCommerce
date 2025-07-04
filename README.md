@@ -12,16 +12,11 @@ A simple Java-based e‑commerce system demonstrating core domain concepts:
 ## Table of Contents
 
 1. [Assumptions](#assumptions)  
-2. [Prerequisites](#prerequisites)  
-3. [Project Structure](#project-structure)  
-4. [Getting Started](#getting-started)  
-5. [Usage & Code Examples](#usage--code-examples)  
-   - Normal Checkout  
-   - Expired Product  
-   - Out of Stock  
-6. [Corner Cases](#corner-cases)  
-7. [Extending & Testing](#extending--testing)  
-8. [License](#license)  
+2. [Getting Started](#getting-started)  
+3. [Usage & Code Examples](#usage--code-examples)  
+4. [Corner Cases](#corner-cases)  
+5. [Extending & Testing](#extending--testing)  
+6. [License](#license)  
 
 ---
 
@@ -36,13 +31,108 @@ A simple Java-based e‑commerce system demonstrating core domain concepts:
 
 ---
 
-## Prerequisites
+## Getting Started
 
-- Java 11 or above  
-- Maven (or Gradle) if you convert to a build tool  
-- Internet connection (for dependency download, if using Maven/Gradle)  
+```bash
+# Clone the repo
+git clone https://github.com/YassoKhalid/eCommerce.git
+cd eCommerce
+
+# Compile & run
+javac -d out/production/eCommerce src/main/java/com/ecomm/**/*.java
+java -cp out/production/eCommerce com.ecomm.Main
+````
 
 ---
 
-## Project Structure
+## Usage & Code Examples
 
+See [Code Examples](#usage--code-examples) for demonstrations of normal and edge-case behaviors.
+
+---
+
+## Corner Cases
+
+Below are key corner cases with links to code examples and snippet references:
+
+1. [Adding Invalid Quantity](#adding-invalid-quantity)
+2. [Checkout with Empty Cart](#checkout-with-empty-cart)
+3. [Exact Balance Match](#exact-balance-match)
+4. [Multiple Checkouts](#multiple-checkouts)
+5. [Shipping-Only Products](#shipping-only-products)
+
+### 1. Adding Invalid Quantity<a name="adding-invalid-quantity"></a>
+
+```java
+// Should throw IllegalArgumentException for non-positive quantity
+Cart cart = new Cart();
+Product p = new DigitalProduct("Sample", BigDecimal.valueOf(5.00));
+
+try {
+    cart.addProduct(p, 0);
+} catch (IllegalArgumentException ex) {
+    System.out.println(ex.getMessage());
+}
+```
+
+### 2. Checkout with Empty Cart<a name="checkout-with-empty-cart"></a>
+
+```java
+// Empty cart: checkout is a no-op, balance unchanged
+Customer c = new Customer("Test", "t@example.com", "01000000000", 100.00);
+Cart empty = new Cart();
+empty.checkout(c);
+System.out.println(c.getBalance()); // Expected: 100.00
+```
+
+### 3. Exact Balance Match<a name="exact-balance-match"></a>
+
+```java
+// Customer balance equals total cost
+Customer c = new Customer("Exact", "e@example.com", "01000000001", 50.00);
+Cart cart = new Cart();
+cart.addProduct(new DigitalProduct("Item", BigDecimal.valueOf(25.00)), 2);
+cart.checkout(c);
+System.out.println(c.getBalance()); // Expected: 0.00
+```
+
+### 4. Multiple Checkouts<a name="multiple-checkouts"></a>
+
+```java
+// Second checkout should throw IllegalStateException
+Customer c = new Customer("Multi", "m@example.com", "01000000002", 200.00);
+Cart cart = new Cart();
+cart.addProduct(new DigitalProduct("D", BigDecimal.valueOf(10.00)), 1);
+cart.checkout(c);
+
+try {
+    cart.checkout(c);
+} catch (IllegalStateException ex) {
+    System.out.println(ex.getMessage());
+}
+```
+
+### 5. Shipping-Only Products<a name="shipping-only-products"></a>
+
+```java
+// Product price = 0, shipping fee applied correctly
+Customer c = new Customer("Ship", "s@example.com", "01000000003", 20.00);
+Cart cart = new Cart();
+cart.addProduct(new PhysicalProduct("SampleBox", BigDecimal.ZERO, LocalDate.now().plusDays(10), BigDecimal.valueOf(5.00)), 2);
+cart.checkout(c);
+System.out.println(c.getBalance()); // Expected: 20 - (2*5) = 10.00
+```
+
+---
+
+## Extending & Testing
+
+* **Unit Tests**: Add JUnit 5 tests under `src/test/java` to cover all methods.
+* **Build Tool**: Convert to Maven/Gradle for dependency & test management.
+* **CI**: Add GitHub Actions for automated builds & tests.
+
+---
+
+## License
+
+This project is licensed under the \[
