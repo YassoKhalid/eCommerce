@@ -137,7 +137,7 @@ public class Cart {
     public void addCartItem(cartItem cartItem) {
         int CountItems = cartItem.quantity;
         if (CountItems > cartItem.product.getQuantity()) {
-            throw new IllegalArgumentException("Only " + cartItem.product.getQuantity() + "are available");
+            throw new IllegalArgumentException("Only " + cartItem.product.getQuantity() + " are available");
         } else if (CountItems <= 0) {
             throw new IllegalArgumentException("Quantity Can not be less than 1");
         } else {

@@ -13,7 +13,7 @@ public class Main {
         cart.addCartItem(biscuit, 10);
         cart.addCartItem(mb, 10);
         cart.addCartItem(new cartItem(chees, 4));
-        cart.addCartItem(new cartItem(tv, 2));
+        cart.addCartItem(new cartItem(tv, 0));
         cart.Checkout(c);
     }
 }
