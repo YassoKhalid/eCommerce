@@ -145,6 +145,11 @@ public class Cart {
         }
     }
 
+    public void addCartItem(Product product, int quantity) {
+        cartItem item = new cartItem(product, quantity);
+        addCartItem(item);
+    }
+
     public void removeCartItem(cartItem cartItem) {
         if (cart.contains(cartItem))
             cart.remove(cartItem);
