@@ -2,15 +2,16 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Customer cust = new Customer("Yassin", "yassenkhaled927@gmail.com", "01287663795", 100000.5);
-        LocalDate expiryDate = LocalDate.now().plusDays(1);
-        Cheese cheese = new Cheese("Cheese1", 15.0, 3, expiryDate, 0.25, 12.3);
-        cartItem cartItem1 = new cartItem(cheese, 2);
-        cust.AddItemToCart(cartItem1);
-        TV tv = new TV("Samsung", 32, 10050, 3, 500);
-        cust.AddItemToCart(new cartItem(tv, 1));
-        cust.Checkout();
-        order Order = new order(cust, order.Status.pending);
-        Order.PlaceOrder();
+        Customer c = new Customer("Ship", "s@example.com", "01000000003", 200000000);
+        Cart cart = new Cart();
+        LocalDate date = LocalDate.now();
+        date = date.plusDays(1);
+        Cheese ch = new Cheese("Gebna", 20.0, 5, date, 550.0);
+        Mobile mb = new Mobile("Samasung S20", 1500, 20, "Samaung", "Galaxy", "White");
+        cart.addCartItem(mb, 10);
+        cart.addCartItem(new cartItem(ch, 4));
+        Biscuit biscuit = new Biscuit("Fairy", 10.0, 20, "Egypt Foods", date);
+        cart.addCartItem(biscuit, 10);
+        cart.Checkout(c);
     }
 }
