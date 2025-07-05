@@ -88,6 +88,8 @@ public class Cart {
             ShippingService.Ship(ShippedElements);
             double weigt = 0;
             for (cartItem shipps : getCart()) {
+                Product product = shipps.product;
+                if (!(product instanceof Shippable)) continue;
                 Shippable Shipped = (Shippable) shipps.product;
                 System.out.printf(
                         "%dx %-20s %4dg%n",
@@ -141,6 +143,11 @@ public class Cart {
         } else {
             cart.add(cartItem);
         }
+    }
+
+    public void addCartItem(Product product, int quantity) {
+        cartItem item = new cartItem(product, quantity);
+        addCartItem(item);
     }
 
     public void removeCartItem(cartItem cartItem) {
