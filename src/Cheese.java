@@ -4,7 +4,7 @@ public class Cheese extends Product implements Expirable, Shippable{
     LocalDate expiryDate;
     double weight;
     double ShippingFees;
-    Cheese(String name, double price, int quantity, LocalDate expiryDate, double weight, double ShippingFees) {
+    Cheese(String name, double price, int quantity, LocalDate expiryDate, double weight) {
         super(name, price, quantity);
         this.expiryDate = expiryDate;
         this.weight = weight;
