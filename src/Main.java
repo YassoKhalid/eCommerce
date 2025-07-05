@@ -13,8 +13,7 @@ public class Main {
         cart.addCartItem(biscuit, 10);
         cart.addCartItem(mb, 10);
         cart.addCartItem(new cartItem(ch, 4));
-        Biscuit biscuit = new Biscuit("Fairy", 10.0, 20, "Egypt Foods", date);
-        cart.addCartItem(biscuit, 10);
+        cart.addCartItem(tv, 2);
         cart.Checkout(c);
     }
 }
