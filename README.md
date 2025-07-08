@@ -57,9 +57,7 @@ Below are key corner cases with links to code examples and snippet references:
 
 1. [Adding Invalid Quantity](#adding-invalid-quantity)
 2. [Checkout with Empty Cart](#checkout-with-empty-cart)
-3. [Exact Balance Match](#exact-balance-match)
-4. [Multiple Checkouts](#multiple-checkouts)
-5. [Shipping-Only Products](#shipping-only-products)
+3. [Shipping-Only Products](#shipping-only-products)
 
 ### 1. Adding Invalid Quantity<a name="adding-invalid-quantity"></a>
 
