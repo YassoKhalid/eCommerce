@@ -1,5 +1,5 @@
 
-# eCommerce Demo
+# eCommerce
 
 A simple Java-based e‑commerce system demonstrating core domain concepts:
 
